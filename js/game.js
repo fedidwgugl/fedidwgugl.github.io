@@ -1,4 +1,11 @@
 
+var start_strings = [
+    "Von der Sowjetunion\nlernen, heißt,\nSiegen lernen.",
+    "Für ein Deutschland,\nin dem wir gut\nund gerne leben.",
+    "Corporate Designs sind\nwie Passwörter.\nJe simpler, desto\nhackbarer.",
+    "Am liebsten mag ich\nDeutschländer.\nDie sind lecker.",
+    "Mehr Ordnung.\nWeniger Entropie.",
+]
 var width = 580;
 var height = 326;
 
@@ -9,7 +16,7 @@ var gold = '#ffd700';
 var alpha = 95;
 
 var fontSize = 48;
-var size_between = (15/48)*fontSize;
+var size_between = (15.0/48.0)*fontSize;
 
 var texts = null;
 var bars = null;
@@ -66,8 +73,9 @@ function create() {
     bg.anchor.x = 0;
     bg.anchor.y = -0.5;
 */
+    document.getElementById('fedidwgugl').value = start_strings[ Math.floor(Math.random()*start_strings.length)];
     createBars();
-    game.time.events.add(Phaser.Timer.QUARTER, createText,this);
+    game.time.events.add(Phaser.Timer.SECOND, createText,this);
 }
 
 function createBar(col,bar_width) {
@@ -87,21 +95,28 @@ function createBar(col,bar_width) {
 function createBars() {
     if (bars != null) {
        for (let i=0; i<bars.length; i++) {
-           game.world.remove(bars[i]);
+            let bar_width = Math.random() * 150 + 100
+           //game.world.remove(bars[i]);
+            let angle = Math.random()*180;
+            let x = width/2 + ((Math.random()-0.5)*bar_width);
+            let y = height/2 + ((Math.random()-0.5)*bar_width);
+            game.add.tween(bars[i]).to( { angle: angle, x: x, y: y, height: bar_width }, 1000, Phaser.Easing.Cubic.Out, true );
        }
     }
+    else {
 
-    bars = Array();
-    
-    let bar_width = Math.random() * 150 + 100
-    for (var i=0; i<cols.length; i++){
-        var bar = createBar(cols[i], bar_width);
-        let angle = Math.random()*360;
-        bar.angle = angle;
-        bar.alpha = alphas[i];
-        bar.x = width/2 + ((Math.random()-0.5)*bar_width);
-        bar.y = height/2 + ((Math.random()-0.5)*bar_width);
-        bars.push(bar);
+        bars = Array();
+        
+        let bar_width = Math.random() * 150 + 100
+        for (var i=0; i<cols.length; i++){
+            var bar = createBar(cols[i], bar_width);
+            let angle = Math.random()*180;
+            bar.angle = angle;
+            bar.alpha = alphas[i];
+            bar.x = width/2 + ((Math.random()-0.5)*bar_width);
+            bar.y = height/2 + ((Math.random()-0.5)*bar_width);
+            bars.push(bar);
+        }
     }
 }
 
@@ -159,14 +174,15 @@ function createText(textstr) {
 
         var text = game.add.text(0, (fontSize+size_between)*i, " "+row+" " , font_css);
         text.anchor.setTo(0,0);
-        texts.push(text)
+        text.height = fontSize + 11 
+        texts.push(text);
 
         if (text.width>max_width) { max_width = text.width; }
    }
 
    let new_height = rows.length*(fontSize) + (rows.length-1)*size_between;
-   let new_top = (height-new_height)/2;
-   let new_left = (width-max_width)/2;
+   let new_top = ((height-new_height)/2)*0.85;
+   let new_left = ((width-max_width)/2)*0.66;
 
    for (let i=0; i<rows.length; i++) {
        texts[i].x += new_left;
@@ -177,32 +193,6 @@ function createText(textstr) {
     //text.margin.set(30, 30);
     //text.inputEnabled = true;
     //text.input.enableDrag();
-}
-
-function measureText(pText, pFontSize, pStyle) {
-    var lDiv = document.createElement('div');
-
-    document.body.appendChild(lDiv);
-
-    if (pStyle != null) {
-        lDiv.style = pStyle;
-    }
-    lDiv.style.fontSize = "" + pFontSize + "px";
-    lDiv.style.position = "absolute";
-    lDiv.style.left = -1000;
-    lDiv.style.top = -1000;
-
-    lDiv.innerHTML = pText;
-
-    var lResult = {
-        width: lDiv.clientWidth,
-        height: lDiv.clientHeight
-    };
-
-    document.body.removeChild(lDiv);
-    lDiv = null;
-
-    return lResult;
 }
 
 function update() { }
@@ -218,16 +208,15 @@ function updateFontSize(fs) {
     createText(document.getElementById('fedidwgugl').value);
 
 }
+ var link;
 
 function saveCanvas(filename) {
-    var link=document.createElement('a');
+    console.log('Download attempt.');
+    link=document.createElement('a');
+    document.body.appendChild(link);
+    link.setAttribute("type", "hidden"); 
     link.href = game.canvas.toDataURL();
     link.download = filename;
     //window.open(game.canvas.toDataURL());
     link.click();
 };
-
-function downloadFile(filePath){
-    //link.href = filePath;
-    //link.download = filePath.substr(filePath.lastIndexOf('/') + 1);
-}

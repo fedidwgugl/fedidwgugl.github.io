@@ -3,16 +3,19 @@
 <head> 
 	<meta charset="UTF-8" />
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="css/buttons.css" rel="stylesheet">
 	<title>#fedidwgugl</title>
     </script>
     <style type="text/css">
         body {
-            margin: 0;
             font-family: 'Lato';
         }
         textarea {
                font-family: 'Lato';
                   font-size: inherit;
+                  resize: none;
+    width: 350px; 
+height: 113px;
         }
     </style>
     <style type="text/css">
@@ -26,18 +29,41 @@
 in dem wir gut
 und gerne leben.
 -->
-<textarea rows="3" cols="30" id="fedidwgugl">
-Von der Sowjetunion 
-lernen, heißt,
-Siegen lernen.
-</textarea>
 
-<button type="button" id="bgchange">Neuer Hintergrund</button>
-<button type="button" id="save">Speichern</button>
-    <input id="xi" type="range" min="40" max="72" step="2" value="48" class="inputwidth"/>
-    <span class="inputlabel"> Schriftgr&ouml;&szlig;e <label id="showxi"></label></span><br/><br/>
+<div style="width: 580px; height: 160px;">
+    <textarea rows="3" cols="30" id="fedidwgugl"></textarea>
 
-<div id="phaser-game" style="nocursor"></div>
+    <!-- <button type="button" id="bgchange">Neuer Hintergrund</button>
+
+    <button type="button" id="save">Speichern</button>
+    --->
+    <div  style="width: 200px; height: 120px; float: right;">
+        <div class="button_base b03_skewed_slide_in" id="bgchange">
+            <div>Hintergrund &Auml;ndern</div>
+            <div></div>
+            <div>Hintergrund &Auml;ndern</div>
+        </div>
+
+        <br/>
+        <br/>
+        <div class="button_base b04_3d_tick" id="save">
+            <div>Speichern</div>
+            <div>Speichern</div>
+        </div>
+
+    </div>
+
+    <br/>
+    <br/>
+    <input id="xi" type="range" min="40" max="72" step="2" value="48" style="width: 450px"/>
+    <span class="inputlabel" style="float:right"> Schriftgr&ouml;&szlig;e <label id="showxi"></label></span><br/><br/>
+
+</div>
+
+
+    <br/>
+
+<div id="phaser-game" style="nocursor; margin-top:10px"></div>
 	<script type="text/javascript" src="js/phaser.min.js"></script>
     <script type="text/javascript" src="js/game.js"></script>
 <script type="text/javascript">
@@ -59,11 +85,10 @@ Siegen lernen.
         updateBackground();
     });
     document.getElementById('save').addEventListener('click', function() {
-        console.log("save clicked");
-        saveCanvas("CDU_Plakat.png");
+        saveCanvas("fedidwgugl.png");
     });
     document.getElementById('xi').addEventListener('input', function() {
-            updateFontSize(this.value);
+            updateFontSize(parseInt(this.value));
     });
 </script>
 
