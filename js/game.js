@@ -1,6 +1,6 @@
 
 var start_strings = [
-    "Von der Sowjetunion\nlernen, heißt,\nSiegen lernen.",
+    "Von der Sowjetunion\nlernen heißt\nsiegen lernen.",
     "Für ein Deutschland,\nin dem wir gut\nund gerne lachen.",
     "Für Sicherheit\nund Ortung.",
     "Für mehr Respekt \nvor Familien.\nAlso. Heterosexuellen.",
