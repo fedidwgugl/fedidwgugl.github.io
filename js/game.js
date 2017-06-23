@@ -7,9 +7,22 @@ var start_strings = [
     "Für eine starke\nWirtschaft \nmit einem\ntrinkfesten Wirt.",
     "Corporate Designs sind\nwie Passwörter.\nJe simpler, desto\nhackbarer.",
     "Am liebsten mag ich\nDeutschländer.\nDie sind lecker.",
-    "Mehr Ordnung.\nWeniger Entropie.",
+    "Mehr Ordnung.\nWeniger\nEntropie.",
     "Ja, Sakrament.\nDa brat mir doch\neiner nen Horst.",
 ]
+
+let string_sizes = [
+    48,
+    48,
+    66,
+    48,
+    44,
+    40,
+    48,
+    52,
+    48,
+]
+
 var width = 580;
 var height = 326;
 
@@ -63,7 +76,7 @@ function preload() {
     game.load.image('rot', 'assets/rot.png');
     game.load.image('gold', 'assets/gold.png');
     //  Load the Google WebFont Loader script
-    game.load.script('webfont', 'http://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
+    game.load.script('webfont', 'https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
 
 }
 
@@ -77,9 +90,12 @@ function create() {
     bg.anchor.x = 0;
     bg.anchor.y = -0.5;
 */
-    document.getElementById('fedidwgugl').value = start_strings[ Math.floor(Math.random()*start_strings.length)];
+    let start_id =  Math.floor(Math.random()*start_strings.length);
+    document.getElementById('fedidwgugl').value = start_strings[ start_id ];
+    document.getElementById('fontSizeSlider').value = string_sizes[ start_id ];
     createBars();
     game.time.events.add(Phaser.Timer.SECOND, createText,this);
+    updateFontSize(string_sizes[ start_id ]);
 }
 
 function createBar(col,bar_width) {

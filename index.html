@@ -43,7 +43,7 @@ und gerne leben.
 
     <br/>
     <br/>
-    <input id="xi" type="range" min="40" max="72" step="2" value="48" style="width: 450px"/>
+    <input id="fontSizeSlider" type="range" min="40" max="72" step="2" value="48" style="width: 450px"/>
     <span class="inputlabel" style="float:right"> Schriftgr&ouml;&szlig;e <label id="showxi"></label></span><br/><br/>
 
 </div>
@@ -75,7 +75,7 @@ und gerne leben.
     document.getElementById('save').addEventListener('click', function() {
         saveCanvas("fedidwgugl.png");
     });
-    document.getElementById('xi').addEventListener('input', function() {
+    document.getElementById('fontSizeSlider').addEventListener('input', function() {
             updateFontSize(parseInt(this.value));
     });
 </script>
