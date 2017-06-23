@@ -1,0 +1,71 @@
+<!doctype html> 
+<html lang="en"> 
+<head> 
+	<meta charset="UTF-8" />
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+	<title>#fedidwgugl</title>
+    </script>
+    <style type="text/css">
+        body {
+            margin: 0;
+            font-family: 'Lato';
+        }
+        textarea {
+               font-family: 'Lato';
+                  font-size: inherit;
+        }
+    </style>
+    <style type="text/css">
+    .nocursor { cursor:none; }
+    </style>
+</head>
+<body>
+<p style="font: Lato;">&nbsp;</p>
+
+<!--Für ein Deutschland,
+in dem wir gut
+und gerne leben.
+-->
+<textarea rows="3" cols="30" id="fedidwgugl">
+Von der Sowjetunion 
+lernen, heißt,
+Siegen lernen.
+</textarea>
+
+<button type="button" id="bgchange">Neuer Hintergrund</button>
+<button type="button" id="save">Speichern</button>
+    <input id="xi" type="range" min="40" max="72" step="2" value="48" class="inputwidth"/>
+    <span class="inputlabel"> Schriftgr&ouml;&szlig;e <label id="showxi"></label></span><br/><br/>
+
+<div id="phaser-game" style="nocursor"></div>
+	<script type="text/javascript" src="js/phaser.min.js"></script>
+    <script type="text/javascript" src="js/game.js"></script>
+<script type="text/javascript">
+    document.getElementById('phaser-game').style.cursor = 'none';
+    /*
+    document.getElementById('fedidwgugl').addEventListener('keyup', function() {
+            console.log("keyup");
+        createText(document.getElementById('fedidwgugl').value);
+    });
+    document.getElementById('fedidwgugl').addEventListener('onkeyup', function() {
+            console.log("onkeyup");
+        createText(document.getElementById('fedidwgugl').value);
+    });
+    */
+    document.getElementById('fedidwgugl').addEventListener('input', function() {
+        createText(document.getElementById('fedidwgugl').value);
+    });
+    document.getElementById('bgchange').addEventListener('click', function() {
+        updateBackground();
+    });
+    document.getElementById('save').addEventListener('click', function() {
+        console.log("save clicked");
+        saveCanvas("CDU_Plakat.png");
+    });
+    document.getElementById('xi').addEventListener('input', function() {
+            updateFontSize(this.value);
+    });
+</script>
+
+</body>
+</html>
