@@ -1,10 +1,14 @@
 
 var start_strings = [
     "Von der Sowjetunion\nlernen, heißt,\nSiegen lernen.",
-    "Für ein Deutschland,\nin dem wir gut\nund gerne leben.",
+    "Für ein Deutschland,\nin dem wir gut\nund gerne lachen.",
+    "Für Sicherheit\nund Ortung.",
+    "Für mehr Respekt \nvor Familien.\nAlso. Heterosexuellen.",
+    "Für eine starke\nWirtschaft \nmit einem\ntrinkfesten Wirt.",
     "Corporate Designs sind\nwie Passwörter.\nJe simpler, desto\nhackbarer.",
     "Am liebsten mag ich\nDeutschländer.\nDie sind lecker.",
     "Mehr Ordnung.\nWeniger Entropie.",
+    "Ja, Sakrament.\nDa brat mir doch\neiner nen Horst.",
 ]
 var width = 580;
 var height = 326;
@@ -29,10 +33,10 @@ var font_css = {
 };
 
 var cols = ['schwarz', 'rot', 'gold' ];
-var alphas = [1, 0.89, 0.89 ];
+var alphas = [1, 0.85, 0.89 ];
 
 
-var game = new Phaser.Game(width, height, Phaser.CANVAS, 'phaser-game', { preload: preload, create: create, update: update });
+var game = new Phaser.Game(width, height, Phaser.CANVAS, 'phaser-game', { preload: preload, create: create });
 
 //  The Google WebFont Loader will look for this object, so create it before loading the script.
 WebFontConfig = {
@@ -94,8 +98,8 @@ function createBar(col,bar_width) {
 
 function createBars() {
     if (bars != null) {
+        let bar_width = Math.random() * 100 + 150
        for (let i=0; i<bars.length; i++) {
-            let bar_width = Math.random() * 150 + 100
            //game.world.remove(bars[i]);
             let angle = Math.random()*180;
             let x = width/2 + ((Math.random()-0.5)*bar_width);
