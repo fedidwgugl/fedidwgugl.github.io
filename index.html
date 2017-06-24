@@ -1,0 +1,97 @@
+<!doctype html> 
+<html lang="en"> 
+<head> 
+	<meta charset="UTF-8" />
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/buttons.css" rel="stylesheet">
+	<title>#fedidwgugl</title>
+    </script>
+</head>
+<body>
+
+<!--Für ein Deutschland,
+in dem wir gut
+und gerne leben.
+<p style="font: Lato;">&nbsp;</p>
+-->
+<h1>#FEDIDWGUGL</h1>
+<h2>F&uuml;r ein Deutschland, in dem wir gut und gerne lachen.</h2>
+
+<div style="width: 580px; height: 160px;">
+    <textarea rows="3" cols="30" id="fedidwgugl"></textarea>
+
+    <!-- <button type="button" id="bgchange">Neuer Hintergrund</button>
+
+    <button type="button" id="save">Speichern</button>
+    --->
+    <div  style="width: 200px; height: 120px; float: right;">
+        <div class="button_base b03_skewed_slide_in" id="bgchange">
+            <div>Hintergrund &Auml;ndern</div>
+            <div></div>
+            <div>Hintergrund &Auml;ndern</div>
+        </div>
+
+        <br/>
+        <br/>
+        <div class="button_base b04_3d_tick" id="save">
+            <div>Speichern</div>
+            <div>Speichern</div>
+        </div>
+
+    </div>
+
+    <br/>
+    <br/>
+    <input id="fontSizeSlider" type="range" min="40" max="72" step="2" value="48" style="width: 450px"/>
+    <span class="inputlabel" style="float:right"> Schriftgr&ouml;&szlig;e <label id="showxi"></label></span><br/><br/>
+
+</div>
+
+
+    <br/>
+
+<div id="phaser-game" style="nocursor; margin-top:10px margin-bottom: 100px;"></div>
+	<script type="text/javascript" src="js/phaser.min.js"></script>
+    <script type="text/javascript" src="js/intersection.js"></script>
+    <script type="text/javascript" src="js/game.js"></script>
+<script type="text/javascript">
+    document.getElementById('phaser-game').style.cursor = 'none';
+    /*
+    document.getElementById('fedidwgugl').addEventListener('keyup', function() {
+            console.log("keyup");
+        createText(document.getElementById('fedidwgugl').value);
+    });
+    document.getElementById('fedidwgugl').addEventListener('onkeyup', function() {
+            console.log("onkeyup");
+        createText(document.getElementById('fedidwgugl').value);
+    });
+    */
+    document.getElementById('fedidwgugl').addEventListener('input', function() {
+        createText(document.getElementById('fedidwgugl').value);
+    });
+    document.getElementById('bgchange').addEventListener('click', function() {
+        updateBackground();
+    });
+    document.getElementById('save').addEventListener('click', function() {
+        saveCanvas("fedidwgugl.png");
+    });
+    document.getElementById('fontSizeSlider').addEventListener('input', function() {
+            updateFontSize(parseInt(this.value));
+    });
+</script>
+
+<br/>
+<br/>
+<br/>
+    <div class="footer">
+        <p class="left">
+            <a href="index.html">#fedidwgugl</a>
+        </p>
+        <p class="right">
+            <a href="impressum.html">Impressum</a>
+        </p>
+        <br/>
+    </div>
+</body>
+</html>

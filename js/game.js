@@ -1,25 +1,27 @@
 
 var start_strings = [
-    "Von der Sowjetunion\nlernen heißt\nsiegen lernen.",
+    //"Von der Sowjetunion\nlernen heißt\nsiegen lernen.",
     "Für ein Deutschland,\nin dem wir gut\nund gerne lachen.",
     "Für Sicherheit\nund Ortung.",
-    "Für mehr Respekt \nvor Familien.\nAlso. Heterosexuellen.",
-    "Für eine starke\nWirtschaft \nmit einem\ntrinkfesten Wirt.",
+    //"Für mehr Respekt \nvor Familien.\nAlso. Heterosexuellen.",
+    //"Für eine starke\nWirtschaft \nmit einem\ntrinkfesten Wirt.",
     "Corporate Designs sind\nwie Passwörter.\nJe simpler, desto\nhackbarer.",
-    "Am liebsten mag ich\nDeutschländer.\nDie sind lecker.",
+    //"Am liebsten mag ich\nDeutschländer.\nDie sind lecker.",
     "Mehr Ordnung.\nWeniger\nEntropie.",
     "Ja, Sakrament.\nDa brat mir doch\neiner nen Horst.",
+    "Keine Inhalte.\nAber hey, guck mal.\nSchwarz, Rot, Gold!",
 ]
 
 let string_sizes = [
-    48,
+    //48,
     48,
     66,
-    48,
-    44,
+    //48,
+    //44,
     40,
-    48,
+    //48,
     52,
+    48,
     48,
 ]
 
@@ -96,6 +98,23 @@ function create() {
     createBars();
     game.time.events.add(Phaser.Timer.SECOND, createText,this);
     updateFontSize(string_sizes[ start_id ]);
+
+    /*
+    poly = new Phaser.Polygon();
+
+    //  And then populate it via setTo, using any combination of values as above
+    poly.setTo([ new Phaser.Point(200, 100), new Phaser.Point(350, 100), new Phaser.Point(375, 200), new Phaser.Point(150, 200) ]);
+
+
+
+    graphics = game.add.graphics(0, 0);
+
+    graphics.beginFill(0xFF33ff);
+    graphics.drawPolygon(poly.points);
+    graphics.endFill();
+
+    game.add.tween(graphics).to({alpha:0},1000, Phaser.Easing.Cubic.Out, true);
+    */
 }
 
 function createBar(col,bar_width) {
@@ -110,6 +129,10 @@ function createBar(col,bar_width) {
         );
 
     return bar;
+}
+
+function getOverlapPolygon(sprite1, sprite2) {
+    
 }
 
 function createBars() {
@@ -137,7 +160,20 @@ function createBars() {
             bar.y = height/2 + ((Math.random()-0.5)*bar_width);
             bars.push(bar);
         }
+
     }
+    /*
+    let points = intersectionCalculator.getOverlapPolygon(bars[1],bars[2]);
+    console.log(points)
+    graphics = game.add.graphics(0,0);
+
+    for (var i=0; i<points.length; i++){
+        graphics.beginFill(0xFF33ff);
+        graphics.drawCircle(points[i][0], points[i][1],100);
+        graphics.endFill();
+    }
+    */
+
 }
 
 function updateBackground() {
@@ -198,6 +234,7 @@ function createText(textstr) {
         texts.push(text);
 
         if (text.width>max_width) { max_width = text.width; }
+        //text.alpha = 0;
    }
 
    let new_height = rows.length*(fontSize) + (rows.length-1)*size_between;
