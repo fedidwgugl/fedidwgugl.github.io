@@ -50,29 +50,63 @@ var intersectionCalculator = {
             var h1 = bar1.height/2;
             var h2 = bar2.height/2;
             points.push( 
-                           this.getIntersection(
+                           calculateIntersection(
                                               x1+r1*Math.cos(t1+c1),
                                               y1+r1*Math.sin(t1+c1),
-                                              x1+r1*Math.cos(Math.PI-c1+t1),
-                                              y1+r1*Math.sin(Math.PI-c1+t1),
+                                              x1+r1*Math.cos(Math.PI+t1-c1),
+                                              y1+r1*Math.sin(Math.PI+t1-c1),
                                               x2+r2*Math.cos(t2+c2),
                                               y2+r2*Math.sin(t2+c2),
-                                              x2+r2*Math.cos(Math.PI-c2+t2),
-                                              y2+r2*Math.sin(Math.PI-c2+t2),
+                                              x2+r2*Math.cos(Math.PI+t2-c2),
+                                              y2+r2*Math.sin(Math.PI+t2-c2),
                                             ),
-                                            /*
-                           this.getIntersection(
-                                              bar1.x+r1*Math.cos(t1+c1),
-                                              bar1.y+r1*Math.sin(t1+c1),
-                                              bar1.x+r1*Math.cos(Math.PI+t1-c1),
-                                              bar1.y+r1*Math.sin(Math.PI+t1-c1),
-                                              bar2.x+r2*Math.cos(t2-c2),
-                                              bar2.y+r2*Math.sin(t2-c2),
-                                              bar2.x+r2*Math.cos(Math.PI+t2+c2),
-                                              bar2.y+r2*Math.sin(Math.PI+t2+c2),
-                                            ),*/
+                           calculateIntersection(
+                                              x1+r1*Math.cos(t1+c1),
+                                              y1+r1*Math.sin(t1+c1),
+                                              x1+r1*Math.cos(Math.PI+t1-c1),
+                                              y1+r1*Math.sin(Math.PI+t1-c1),
+                                              x2+r2*Math.cos(t2-c2),
+                                              y2+r2*Math.sin(t2-c2),
+                                              x2+r2*Math.cos(Math.PI+t2+c2),
+                                              y2+r2*Math.sin(Math.PI+t2+c2),
+                                            ),
+                           calculateIntersection(
+                                              x1+r1*Math.cos(t1-c1),
+                                              y1+r1*Math.sin(t1-c1),
+                                              x1+r1*Math.cos(Math.PI+t1+c1),
+                                              y1+r1*Math.sin(Math.PI+t1+c1),
+                                              x2+r2*Math.cos(t2-c2),
+                                              y2+r2*Math.sin(t2-c2),
+                                              x2+r2*Math.cos(Math.PI+t2+c2),
+                                              y2+r2*Math.sin(Math.PI+t2+c2),
+                                            ),
+                           calculateIntersection(
+                                              x1+r1*Math.cos(t1-c1),
+                                              y1+r1*Math.sin(t1-c1),
+                                              x1+r1*Math.cos(Math.PI+t1+c1),
+                                              y1+r1*Math.sin(Math.PI+t1+c1),
+                                              x2+r2*Math.cos(t2+c2),
+                                              y2+r2*Math.sin(t2+c2),
+                                              x2+r2*Math.cos(Math.PI+t2-c2),
+                                              y2+r2*Math.sin(Math.PI+t2-c2),
+                                            ),
                        );
             return points;
         }
 
     }
+
+
+function calculateIntersection(xB1,yB1,xB2,yB2,xC1,yC1,xC2,yC2) {
+    let A = (xB1-xC1) / (xC2-xC1);
+    let H = (yB1-yC1) / (yC2-yC1);
+    let D = (yB2-yB1) / (yC2-yC1);
+    let G = (xB2-xB1) / (xC2-xC1);
+
+    let alpha = (H-A)/(G-D);
+
+    let x = xB1 + alpha*(xB2-xB1);
+    let y = yB1 + alpha*(yB2-yB1);
+
+    return new Phaser.Point(x,y);
+}

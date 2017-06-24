@@ -39,6 +39,7 @@ var size_between = (15.0/48.0)*fontSize;
 
 var texts = null;
 var bars = null;
+var graphics = null;
 
 var font_css = {
     font: "" + fontSize + "px 'Lato'",
@@ -48,7 +49,7 @@ var font_css = {
 };
 
 var cols = ['schwarz', 'rot', 'gold' ];
-var alphas = [1, 0.85, 0.89 ];
+var alphas = [1, 1, 1 ];
 
 
 var game = new Phaser.Game(width, height, Phaser.CANVAS, 'phaser-game', { preload: preload, create: create });
@@ -136,15 +137,35 @@ function getOverlapPolygon(sprite1, sprite2) {
 }
 
 function createBars() {
-    if (bars != null) {
+    if (bars !== null) {
         let bar_width = Math.random() * 100 + 150
-       for (let i=0; i<bars.length; i++) {
-           //game.world.remove(bars[i]);
-            let angle = Math.random()*180;
-            let x = width/2 + ((Math.random()-0.5)*bar_width);
-            let y = height/2 + ((Math.random()-0.5)*bar_width);
-            game.add.tween(bars[i]).to( { angle: angle, x: x, y: y, height: bar_width }, 1000, Phaser.Easing.Cubic.Out, true );
-       }
+           if (graphics!== null) 
+           {
+                game.add.tween(graphics).to({alpha:0},
+                                            250,
+                                            Phaser.Easing.Cubic.In,true)
+                    .onComplete.add(
+                        function () { 
+                           game.world.remove(graphics);
+                           for (let i=0; i<bars.length; i++) {
+                               //game.world.remove(bars[i]);
+                                let angle = Math.random()*180;
+                                let x = width/2 + ((Math.random()-0.5)*bar_width);
+                                let y = height/2 + ((Math.random()-0.5)*bar_width);
+                                game.add.tween(bars[i]).to( { 
+                                                              angle: angle, 
+                                                              x: x, 
+                                                              y: y, 
+                                                              height: bar_width 
+                                                            }, 
+                                                            1000, 
+                                                            Phaser.Easing.Cubic.Out, 
+                                                            true ).onComplete.add( drawOverlap );
+
+                           }
+                        }
+                    );
+           }
     }
     else {
 
@@ -161,19 +182,42 @@ function createBars() {
             bars.push(bar);
         }
 
+        drawOverlap();
+
     }
-    /*
-    let points = intersectionCalculator.getOverlapPolygon(bars[1],bars[2]);
-    console.log(points)
+}
+
+function drawOverlap() {
+   if (graphics!== null) 
+   {
+       game.world.remove(graphics);
+   }
+    
     graphics = game.add.graphics(0,0);
+    graphics.alpha = 0;
 
-    for (var i=0; i<points.length; i++){
-        graphics.beginFill(0xFF33ff);
-        graphics.drawCircle(points[i][0], points[i][1],100);
-        graphics.endFill();
-    }
-    */
-
+    let polys = Array();
+    polys.push(
+                intersectionCalculator.getOverlapPolygon(bars[0],bars[1]),
+                intersectionCalculator.getOverlapPolygon(bars[1],bars[2]),
+                intersectionCalculator.getOverlapPolygon(bars[0],bars[2])
+              );
+    let count = 0;
+    polys.forEach( function (p) {
+        let poly = new Phaser.Polygon(p);
+            let color;
+            if (count==0) {
+                color = 0xB5081C;
+            } else {
+                color = 0xF3A402;
+            }
+            graphics.beginFill(color);
+            graphics.drawPolygon(poly);
+            graphics.endFill();
+            count += 1;
+    });
+    createText();
+    game.add.tween(graphics).to({alpha:1}, 1000, Phaser.Easing.Cubic.Out, true);
 }
 
 function updateBackground() {
