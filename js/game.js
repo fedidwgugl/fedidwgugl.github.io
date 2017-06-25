@@ -27,6 +27,13 @@ let string_sizes = [
 
 var width = 580;
 var height = 326;
+//var height = 580;
+//var width = 820;
+//var height = 312;
+//
+var wasserwidth = 20;
+var wasser_bar = null;
+var wasser_text = null;
 
 var bg_grey = '#e3e2de';
 var schwarz = '#32302e';
@@ -48,11 +55,17 @@ var font_css = {
     backgroundColor: "white",
 };
 
+var font_watermark_css = {
+    font: "" + (wasserwidth-7) + "px 'Lato'",
+    fill: "black",
+    fontWeight: "bold",
+};
+
 var cols = ['schwarz', 'rot', 'gold' ];
 var alphas = [1, 1, 1 ];
 
 
-var game = new Phaser.Game(width, height, Phaser.CANVAS, 'phaser-game', { preload: preload, create: create });
+var game = new Phaser.Game(width + wasserwidth, height, Phaser.CANVAS, 'phaser-game', { preload: preload, create: create });
 
 //  The Google WebFont Loader will look for this object, so create it before loading the script.
 WebFontConfig = {
@@ -78,6 +91,7 @@ function preload() {
     game.load.image('schwarz', 'assets/schwarz.png');
     game.load.image('rot', 'assets/rot.png');
     game.load.image('gold', 'assets/gold.png');
+    game.load.image('weiss', 'assets/weiss.png');
     //  Load the Google WebFont Loader script
     game.load.script('webfont', 'https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
 
@@ -294,6 +308,7 @@ function createText(textstr) {
     //text.margin.set(30, 30);
     //text.inputEnabled = true;
     //text.input.enableDrag();
+    createWatermark();
 }
 
 function update() { }
@@ -308,6 +323,7 @@ function updateFontSize(fs) {
     font_css.font = '' + fontSize +"px 'Lato'";
     createText(document.getElementById('fedidwgugl').value);
 
+
 }
  var link;
 
@@ -321,3 +337,23 @@ function saveCanvas(filename) {
     //window.open(game.canvas.toDataURL());
     link.click();
 };
+
+function createWatermark() {
+
+    if (wasser_bar !== null) {
+        game.world.remove(wasser_bar);
+    }
+    if (wasser_text !== null) {
+        game.world.remove(wasser_text);
+    }
+    wasser_bar  = game.add.sprite(width+wasserwidth/2,height,"weiss");
+    wasser_bar.scale.setTo(height,wasserwidth);
+    wasser_bar.anchor.setTo(0,0.5);
+    wasser_bar.angle = 270;
+
+    wasser_text  = game.add.text(width+wasserwidth/2,height," fedidwgugl-generator.de", font_watermark_css);
+    wasser_text.anchor.setTo(0,0.4);
+    wasser_text.angle = 270;
+
+
+}
