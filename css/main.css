@@ -46,7 +46,7 @@ body {
     .nocursor { cursor:none; }
 
 .footer {
-    max-width: 950px;
+    max-width: 580px;
 
     overflow: hidden; /* add this to contain floated children */
     border-top: 1px solid #f3a402;
@@ -71,6 +71,10 @@ a:link, a:visited {
     text-decoration: none;
 }
 
+p {
+    max-width: 580px;
+
+}
 
 a:hover, a:active {
     color: #f3a402;
