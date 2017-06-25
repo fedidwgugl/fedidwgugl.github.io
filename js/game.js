@@ -65,7 +65,7 @@ var cols = ['schwarz', 'rot', 'gold' ];
 var alphas = [1, 1, 1 ];
 
 
-var game = new Phaser.Game(width + wasserwidth, height, Phaser.CANVAS, 'phaser-game', { preload: preload, create: create });
+var game = new Phaser.Game(width, height+wasserwidth, Phaser.CANVAS, 'phaser-game', { preload: preload, create: create });
 
 //  The Google WebFont Loader will look for this object, so create it before loading the script.
 WebFontConfig = {
@@ -346,14 +346,14 @@ function createWatermark() {
     if (wasser_text !== null) {
         game.world.remove(wasser_text);
     }
-    wasser_bar  = game.add.sprite(width+wasserwidth/2,height,"weiss");
-    wasser_bar.scale.setTo(height,wasserwidth);
-    wasser_bar.anchor.setTo(0,0.5);
-    wasser_bar.angle = 270;
+    wasser_bar  = game.add.sprite(0,height,"weiss");
+    wasser_bar.scale.setTo(width,wasserwidth);
+    //wasser_bar.anchor.setTo(0,0.5);
+    //wasser_bar.angle = 270;
 
-    wasser_text  = game.add.text(width+wasserwidth/2,height," fedidwgugl-generator.de", font_watermark_css);
-    wasser_text.anchor.setTo(0,0.4);
-    wasser_text.angle = 270;
+    wasser_text  = game.add.text(width,height+wasserwidth/2," fedidwgugl-generator.de", font_watermark_css);
+    wasser_text.anchor.setTo(1,0.4);
+    //wasser_text.angle = 270;
 
 
 }
